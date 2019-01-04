@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import { BrowserRouter as Router, Redirect, Route, Link } from 'react-router-dom';
+//
+import Login from './login/login.jsx';
+//
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<Router>
+				<div>
+					<nav>
+						<div className="navbar-wrapper">
+							App Work!!!
+								<ul className="right">
+								<li><Link to="/login">Login</Link></li>
+								<li><Link to="/vitrina">Vitrina</Link></li>
+							</ul>
+						</div>
+					</nav>
+					<Route exact path='/'>
+						<Redirect to='/login' />
+					</Route>
+					<Route path='/login' component={Login} />
+					<Route path='/vitrina' render={(props) => (
+						<p>Vitrina work!!!</p>
+					)}>
+					</Route>
+				</div>
+			</Router>
+		);
+	}
 }
 
 export default App;
