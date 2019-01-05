@@ -2,6 +2,11 @@ import React from 'react';
 import './login.css';
 //
 class Login extends React.Component {
+	//
+	registrarUsuario(e) {
+		e.preventDefault();
+	}
+	//
 	render() {
 		return (
 			<div className="login valign-wrapper row">
@@ -10,7 +15,7 @@ class Login extends React.Component {
 						<div className="card white">
 							<div className="card-content">
 								<span className="card-title">Ingresar</span>
-								<form className="row" id="login-form">
+								<form className="row" id="login-form" onSubmit={this.registrarUsuario}>
 									<div className="input-field">
 										<input className="validate valid" id="email" name="email" required type="email" />
 										<label htmlFor="email" className="active">Correo</label>
