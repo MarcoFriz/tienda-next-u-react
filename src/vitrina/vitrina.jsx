@@ -11,7 +11,7 @@ class Vitrina extends React.Component {
 	BASE_URL = 'http://localhost:8082/';
 	constructor() {
 		super();
-		this.state = { products: null, cart: [], total: 0 };
+		this.state = { products: null, cart: {}, total: 0 };
 	}
 
 	componentWillMount() {

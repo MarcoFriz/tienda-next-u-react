@@ -4,22 +4,27 @@ import { Link } from 'react-router-dom';
 class Tienda extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { total: 10, list: [] };
-		console.log(props);
+		this.state = { total: 0, list: [] };
 	}
-	componentWillReceiveProps(next_props) {
+	componentWillMount() {
+		var next_props = this.props;
 		var products = next_props.products;
 		var cart = next_props.cart;
-		if (cart != null) {
+		var total = 0;
+		if (cart && products) {
 			var list = products.filter(item => {
 				for (let i in cart) {
-					if (cart[i].id == item.id) return true;
+					if (i == "id_" + item.id) {
+						item.cant = cart[i];
+						item.total = item.cant * item.precio;
+						total += item.total;
+						return true;
+					}
 				}
 				return false;
 			})
-			this.setState({ list: list });
+			this.setState({ total: total, list: list });
 		}
-		console.log(cart);
 	}
 	render() {
 		const total = this.state.total;
@@ -38,7 +43,15 @@ class Tienda extends React.Component {
 										<div>
 											<ul className="collection">
 												{list.map(item =>
-													<li>item.nombre</li>
+													<li className="collection-item avatar">
+														<img className="circle" src={"/" + item.imagen} alt={item.nombre} />
+														<div className="title"><b>{item.nombre}</b></div>
+														<p>
+															<i>Unidades: </i>{item.cant}
+															<br />
+															<i>Subtotal: </i>${item.total}
+														</p>
+													</li>
 												)}
 											</ul>
 										</div>
