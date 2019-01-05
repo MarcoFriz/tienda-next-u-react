@@ -63,7 +63,7 @@ class Catalogo extends React.Component {
 											<span className="card-title card-gradient">{item.nombre}</span>
 										</div>
 										<div className='card-content'>
-											<p><b>Precio: </b>{item.precio} </p>
+											<p><b>Precio: </b> $ {item.precio} </p>
 											<p><b>Unidades disponibles: </b> {item.stock} </p>
 										</div>
 										<div className="card-action with-cols">
