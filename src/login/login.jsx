@@ -10,7 +10,7 @@ class Login extends React.Component {
 						<div className="card white">
 							<div className="card-content">
 								<span className="card-title">Ingresar</span>
-								<form className="row" id="login-form" role="form">
+								<form className="row" id="login-form">
 									<div className="input-field">
 										<input className="validate valid" id="email" name="email" required="" type="email" />
 										<label htmlFor="email" className="active">Correo</label>
