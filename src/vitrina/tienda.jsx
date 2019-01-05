@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-//
+/**
+* props: onBuy(), products, cart, pagando
+*/
 class Tienda extends React.Component {
 	constructor(props) {
 		super(props)
@@ -55,11 +57,15 @@ class Tienda extends React.Component {
 									</div>
 								</div>
 								<div className="col s6">
+									{(this.props.pagando &&
+										<div className="progress">
+											<div className="indeterminate"></div>
+										</div>)}
 									<h1>
 										Total: <i> $ {total}</i>
 									</h1>
 									<Link className="btn waves-effect red" to="/vitrina">Cancelar</Link>
-									<a className="btn waves-effect">Pagar</a>
+									<a className="btn waves-effect" href="#" onClick={this.buy.bind(this)}>Pagar</a>
 								</div>
 							</div>
 						</div>
@@ -67,6 +73,12 @@ class Tienda extends React.Component {
 				</div>
 			</div>
 		)
+	}
+	//
+	buy() {
+		if (this.props.onBuy) {
+			this.props.onBuy();
+		}
 	}
 }
 //

@@ -8,15 +8,15 @@ import Producto from './producto.jsx';
 import './vitrina.css';
 //
 class Vitrina extends React.Component {
-	BASE_URL = 'http://localhost:8082/';
+	SERVER_URL = 'http://localhost:8082/';
 	constructor() {
 		super();
-		this.state = { products: null, cart: {}, total: 0 };
+		this.state = { products: null, cart: {}, total: 0, pagando: false };
 	}
 
 	componentWillMount() {
 		request
-			.get(this.BASE_URL + 'product/all')
+			.get(this.SERVER_URL + 'product/all')
 			.end((err, res) => {
 				if (err || !res.ok) { console.log("Error", err); }
 				else { this.setState({ products: res.body }); }
@@ -46,7 +46,7 @@ class Vitrina extends React.Component {
 					</nav>
 					<div className="row">
 						<Route exact path="/vitrina" render={() => <Catalogo products={this.state.products} onAdd={this.addToCart.bind(this)} />} />
-						<Route path="/vitrina/tienda" render={() => <Tienda products={this.state.products} cart={cart} />} />
+						<Route path="/vitrina/tienda" render={() => <Tienda products={this.state.products} cart={cart} onBuy={this.onBuyHandler.bind(this)} pagando={this.state.pagando} />} />
 						<Route path="/vitrina/producto/:id" render={(props) => <Producto products={this.state.products} {...props} />} />
 					</div>
 				</div>
@@ -62,7 +62,32 @@ class Vitrina extends React.Component {
 		for (let item in cart) {
 			total += cart[item];
 		}
-		this.setState({ cart: cart, total: total });
+		this.setState({ cart: cart, total: total, pagando: false });//por si se me pasa
+	}
+
+	onBuyHandler() {
+		this.setState({ pagando: true })
+		//
+		var cart = this.state.cart;
+		var products = this.state.products;
+		this.count = 0;
+		this.recived = 0;
+		for (let id in cart) {
+			this.count++;
+			let _id = id.replace("id_", "");
+			let product = products.find(item => item.id == Number(_id));
+			product.stock -= Number(cart[id]);
+			request
+				.post(this.SERVER_URL + "product/update/" + _id)
+				.send(product)
+				.end((err, res) => {
+					this.recived++;
+					//recibimos todos los envios, actualizamos la pagina
+					if (this.count == this.recived) {
+
+					}
+				})
+		}
 	}
 }
 //
