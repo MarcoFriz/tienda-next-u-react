@@ -15,12 +15,7 @@ class Vitrina extends React.Component {
 	}
 
 	componentWillMount() {
-		request
-			.get(this.SERVER_URL + 'product/all')
-			.end((err, res) => {
-				if (err || !res.ok) { console.log("Error", err); }
-				else { this.setState({ products: res.body }); }
-			});
+		this.refresh();
 	}
 
 	render() {
@@ -54,6 +49,16 @@ class Vitrina extends React.Component {
 		)
 	}
 	//
+	refresh() {
+		request
+			.get(this.SERVER_URL + 'product/all')
+			.end((err, res) => {
+				console.log('REFRESSHHH');
+				if (err || !res.ok) { console.log("Error", err); }
+				else { this.setState({ products: res.body, cart: {}, total: 0, pagando: false }); }
+			});
+	}
+	//
 	addToCart(id, cant) {
 		var cart = this.state.cart;
 		if (cart["id_" + id] === undefined) cart["id_" + id] = 0;
@@ -83,8 +88,9 @@ class Vitrina extends React.Component {
 				.end((err, res) => {
 					this.recived++;
 					//recibimos todos los envios, actualizamos la pagina
+					console.log(this.count, this.recived)
 					if (this.count == this.recived) {
-
+						this.refresh();
 					}
 				})
 		}
