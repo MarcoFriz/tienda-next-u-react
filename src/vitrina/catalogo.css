@@ -1,0 +1,12 @@
+
+.productos{
+	overflow: auto;
+	position: relative;
+	margin: auto;
+	max-height: 650px;
+}
+
+/** Arreglos para las cartas **/
+.with-cols{
+	display: flex !important;
+}

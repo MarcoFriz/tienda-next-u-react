@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Redirect, Route, Link } from 'react-router-dom';
 //
 import Login from './login/login.jsx';
+import Vitrina from './vitrina/vitrina.jsx';
 //
 class App extends Component {
 	render() {
@@ -22,10 +23,8 @@ class App extends Component {
 						<Redirect to='/login' />
 					</Route>
 					<Route path='/login' component={Login} />
-					<Route path='/vitrina' render={(props) => (
-						<p>Vitrina work!!!</p>
-					)}>
-					</Route>
+					<Route path='/logout' component={Login} />
+					<Route path='/vitrina' component={Vitrina} />
 				</div>
 			</Router>
 		);
