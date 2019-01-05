@@ -91,6 +91,7 @@ class Vitrina extends React.Component {
 					console.log(this.count, this.recived)
 					if (this.count == this.recived) {
 						this.refresh();
+						this.props.history.push("/vitrina")
 					}
 				})
 		}
