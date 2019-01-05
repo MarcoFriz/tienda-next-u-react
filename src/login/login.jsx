@@ -14,7 +14,7 @@ class Login extends React.Component {
 	//
 	registrarUsuario(e) {
 		e.preventDefault();
-		this.setState({ loging: true })
+		this.setState({ loging: true, msg: null })
 		const data = new FormData(e.target);
 		var vars = { email: data.get('email'), pass: data.get('pass') }
 		request
@@ -22,7 +22,13 @@ class Login extends React.Component {
 			.send(vars)
 			.end((err, res) => {
 				this.setState({ loging: false })
-				console.log("Recibimos: ", res);
+				//si es ok, pasamos a la siguiente página
+				var result = res.body;
+				if (result.result == "Ok") {
+					//enviamos a la siguiente página
+				} else {
+					this.setState({ msg: "Usuario o contraseña incorrectos" })
+				}
 			})
 	}
 	//
@@ -49,7 +55,9 @@ class Login extends React.Component {
 											<div className="indeterminate"></div>
 										</div>
 									}
-									<div className="red-text mensaje"></div>
+									{this.state.msg &&
+										<div className="red-text mensaje">{this.state.msg}</div>
+									}
 								</form>
 							</div>
 						</div>
