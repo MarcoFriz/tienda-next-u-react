@@ -26,6 +26,7 @@ class Login extends React.Component {
 				var result = res.body;
 				if (result.result == "Ok") {
 					//enviamos a la siguiente página
+					this.props.history.push('/vitrina');
 				} else {
 					this.setState({ msg: "Usuario o contraseña incorrectos" })
 				}
