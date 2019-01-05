@@ -12,11 +12,11 @@ class Login extends React.Component {
 								<span className="card-title">Ingresar</span>
 								<form className="row" id="login-form">
 									<div className="input-field">
-										<input className="validate valid" id="email" name="email" required="" type="email" />
+										<input className="validate valid" id="email" name="email" required type="email" />
 										<label htmlFor="email" className="active">Correo</label>
 									</div>
 									<div className="input-field">
-										<input className="validate valid" id="pass" name="pass" required="" type="password" />
+										<input className="validate valid" id="pass" name="pass" required type="password" />
 										<label htmlFor="pass" className="active">Contraseña</label>
 									</div>
 									<button type="submit" className="btn">Ingresar</button>
