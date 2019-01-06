@@ -21,6 +21,11 @@ class Login extends React.Component {
 			.post(this.BASE_URL + 'user/login')
 			.send(vars)
 			.end((err, res) => {
+				if (err) {
+					this.setState({ loging: false })
+					this.setState({ msg: "Error al conectarse al servidor" })
+					return;
+				}
 				this.setState({ loging: false })
 				//si es ok, pasamos a la siguiente página
 				var result = res.body;

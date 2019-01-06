@@ -6,7 +6,7 @@
 					 rgba(0, 0, 0, 0.7)
 				 ),
 				 /* bottom, image */
-				 url(../img/main-fondo.jpg);
+				 url(/img/main-fondo.jpg);
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: cover;
